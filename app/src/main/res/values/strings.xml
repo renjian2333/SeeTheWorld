@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SeeTheWorld</string>
+    <string name="title_home">首页</string>
+    <string name="title_mine">我的</string>
+    <string name="title_scan_read">拍照阅读</string>
+
+    <string name="news">这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是
+        新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这
+        是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+    这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+    这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+        这是新闻内容这是新闻内容</string>
+</resources>
