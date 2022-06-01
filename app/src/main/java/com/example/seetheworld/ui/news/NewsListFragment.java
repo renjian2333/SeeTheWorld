@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsListFragment extends Fragment {
+    private String newsType;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefresh;
     NewsListAdapter adapter;
@@ -38,7 +40,22 @@ public class NewsListFragment extends Fragment {
     private final Handler handler = new Handler(Looper.myLooper());
     private TextView footer;
 
-    public NewsListFragment() { }
+    public NewsListFragment(String newsType) {
+        this.newsType = newsType;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_news_list, container, false);
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -55,13 +72,10 @@ public class NewsListFragment extends Fragment {
 
         });
         adapter = new NewsListAdapter(new DiffUtilNewsCallBack());
-        adapter.setOnNewsItemClickListener(new NewsListAdapter.OnNewsItemClickEvent() {
-            @Override
-            public void onNewItemClick(int position) {
-                Intent intent = new Intent(getActivity(), ShowNewsActivity.class);
-                intent.putExtra("newsid", dataList.get(position).getId());
-                startActivity(intent);
-            }
+        adapter.setOnNewsItemClickListener(position -> {
+            Intent intent = new Intent(getActivity(), ShowNewsActivity.class);
+            intent.putExtra("newsid", dataList.get(position).getId());
+            startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
 
@@ -128,7 +142,7 @@ public class NewsListFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String result = HttpUtils.post("/news/recommend?catagory=科技&userid=1952723",page,pageSize);
+                String result = HttpUtils.post("/news/recommend?catagory="+newsType+"&userid=1952723",page,pageSize);
                 Gson gson=new Gson();
                 Type listType = new TypeToken<Message<List<PartNews>>>(){}.getType();
                 Message<List<PartNews>> t=gson.fromJson(result,listType);
@@ -154,16 +168,6 @@ public class NewsListFragment extends Fragment {
         }).start();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
 
 }
