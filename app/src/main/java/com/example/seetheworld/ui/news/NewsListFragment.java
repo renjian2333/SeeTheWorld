@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.seetheworld.R;
 import com.example.seetheworld.data.Message;
 import com.example.seetheworld.data.PartNews;
-import com.example.seetheworld.ui.ShowNewsActivity;
 import com.example.seetheworld.util.HttpUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -142,7 +140,12 @@ public class NewsListFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String result = HttpUtils.post("/news/recommend?catagory="+newsType+"&userid=1952723",page,pageSize);
+                String result;
+                if(newsType.equals("热门")){
+                    result = HttpUtils.post("/news/recommend?"+"userid=1952723",page,pageSize);
+                } else {
+                    result = HttpUtils.post("/news/recommend?catagory=" + newsType + "&userid=1952723", page, pageSize);
+                }
                 Gson gson=new Gson();
                 Type listType = new TypeToken<Message<List<PartNews>>>(){}.getType();
                 Message<List<PartNews>> t=gson.fromJson(result,listType);
@@ -167,7 +170,5 @@ public class NewsListFragment extends Fragment {
             }
         }).start();
     }
-
-
 
 }

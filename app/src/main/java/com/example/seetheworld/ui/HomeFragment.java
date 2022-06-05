@@ -1,46 +1,34 @@
 package com.example.seetheworld.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.seetheworld.R;
-import com.example.seetheworld.data.Message;
-import com.example.seetheworld.data.PartNews;
-import com.example.seetheworld.ui.news.DiffUtilNewsCallBack;
-import com.example.seetheworld.ui.news.NewsListAdapter;
 import com.example.seetheworld.ui.news.NewsListFragment;
-import com.example.seetheworld.util.HttpUtils;
+import com.example.seetheworld.ui.news.ShowNewsActivity;
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    private ImageButton search_btn;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ArrayList<NewsListFragment> fragmentList = new ArrayList<>();
     private ArrayList<String> newsType = new ArrayList<>();
+
 
     @Nullable
     @Override
@@ -53,28 +41,51 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        search_btn = view.findViewById(R.id.news_search_btn);
         tabLayout = view.findViewById(R.id.news_tab_layout);
-        tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
-        tabLayout.setFocusableInTouchMode(false);
-
         viewPager = view.findViewById(R.id.news_view_pager);
         initData();
         viewPager.setAdapter(new MyAdapter(getActivity().getSupportFragmentManager(), 0));
         tabLayout.setupWithViewPager(viewPager);
+
+        addListener();
     }
 
-    public void initData(){
+    /**
+     * @description: 设置监听
+     * @params: []
+     * @return: void
+     * @author: renjian
+     * @dateTime: 2022/6/5 17:19
+     */
+
+    private void addListener() {
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShowNewsActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initData(){
+        newsType.add("热门");
         newsType.add("科技");
         newsType.add("社会");
         newsType.add("教育");
         newsType.add("娱乐");
         newsType.add("时政");
+        newsType.add("游戏");
+        newsType.add("财经");
+        newsType.add("股票");
 
         for(String type:newsType){
             fragmentList.add(new NewsListFragment(type));
         }
 
     }
+
 
     class MyAdapter extends FragmentPagerAdapter{
 

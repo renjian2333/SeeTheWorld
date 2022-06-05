@@ -1,4 +1,4 @@
-package com.example.seetheworld.ui;
+package com.example.seetheworld.ui.news;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,7 +79,6 @@ public class ShowNewsActivity extends AppCompatActivity {
                 Gson gson=new Gson();
                 Type newsType = new TypeToken<Message<PartNews>>(){}.getType();
                 Message<PartNews> t=gson.fromJson(result,newsType);
-                Log.d("shownews", t.getResult().toString());
 
                 android.os.Message msg = new android.os.Message();
                 msg.what = 0;

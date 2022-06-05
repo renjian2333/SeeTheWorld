@@ -15,8 +15,5 @@
     <color name="dark_text_color">#fafafa</color>
     <color name="dark_icon_tint_color">#A2A2A2</color>
 
-<!--    // light theme colors-->
-    <color name="light_text_color">#363636</color>
-
-
+    <color name="ls_blue">#4181BA</color>
 </resources>
