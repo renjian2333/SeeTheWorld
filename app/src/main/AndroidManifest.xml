@@ -15,7 +15,7 @@
         android:theme="@style/Theme.SeeTheWorld"
         tools:targetApi="n">
         <activity
-            android:name=".ui.news.SearchActivity"
+            android:name=".ui.search.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".ui.news.ShowNewsActivity"

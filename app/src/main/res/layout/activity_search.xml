@@ -4,8 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.news.SearchActivity">
+    android:orientation="vertical"
+    tools:context=".ui.search.SearchActivity">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_input"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:iconifiedByDefault="false"
+        app:queryHint="竞教结合" />
+
+    <TextView
+        android:id="@+id/no_result_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/no_data"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/result_list_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"/>
 
 
 </LinearLayout>

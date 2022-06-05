@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.seetheworld.R;
 import com.example.seetheworld.ui.news.NewsListFragment;
-import com.example.seetheworld.ui.news.ShowNewsActivity;
+import com.example.seetheworld.ui.search.SearchActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ShowNewsActivity.class);
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -85,7 +85,6 @@ public class HomeFragment extends Fragment {
         }
 
     }
-
 
     class MyAdapter extends FragmentPagerAdapter{
 

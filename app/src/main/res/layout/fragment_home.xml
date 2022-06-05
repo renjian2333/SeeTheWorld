@@ -12,6 +12,14 @@
         android:layout_height="50dp"
         android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/voice_helper_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="#0000"
+            android:src="@drawable/ic_voice" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -23,6 +31,7 @@
             android:textColor="@color/ls_blue"
             android:textSize="@dimen/title" />
 
+
         <ImageButton
             android:id="@+id/news_search_btn"
             android:layout_width="wrap_content"
@@ -32,12 +41,7 @@
             android:background="#0000"
             android:src="@drawable/ic_search_30" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:background="#0000"
-            android:src="@drawable/ic_voice" />
+
 
         <ImageButton
             android:id="@+id/listen_news_btn"

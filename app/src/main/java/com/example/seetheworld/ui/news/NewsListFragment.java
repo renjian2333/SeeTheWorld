@@ -149,7 +149,6 @@ public class NewsListFragment extends Fragment {
                 Gson gson=new Gson();
                 Type listType = new TypeToken<Message<List<PartNews>>>(){}.getType();
                 Message<List<PartNews>> t=gson.fromJson(result,listType);
-                dataList = t.getResult();
 
                 handler.post(new Runnable() {
                     @Override
@@ -158,12 +157,12 @@ public class NewsListFragment extends Fragment {
                         if(back){
                             newList.addAll(t.getResult());
                             footer.setVisibility(View.GONE);
-                            adapter.submitList(newList);
                         } else {
                             newList.addAll(0, t.getResult());
-                            adapter.submitList(newList);
                             swipeRefresh.setRefreshing(false);
                         }
+                        adapter.submitList(newList);
+                        dataList = newList;
                     }
                 });
 
