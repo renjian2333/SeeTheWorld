@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.seetheworld.R;
+import com.example.seetheworld.data.Data;
 import com.example.seetheworld.data.Message;
 import com.example.seetheworld.data.PartNews;
 import com.example.seetheworld.ui.news.DiffUtilNewsCallBack;
@@ -33,7 +34,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     RecyclerView recyclerView;
     NewsListAdapter adapter;
-    List<PartNews> dataList;
+//    List<PartNews> dataList;
     private final Handler handler = new Handler(Looper.myLooper());
     private SearchView searchView;
     private TextView warning_tv;
@@ -72,7 +73,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         adapter = new NewsListAdapter(new DiffUtilNewsCallBack());
         adapter.setOnNewsItemClickListener(position -> {
             Intent intent = new Intent(this, ShowNewsActivity.class);
-            intent.putExtra("newsid", dataList.get(position).getId());
+            intent.putExtra("newsid", Data.searchResultList.get(position).getId());
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
@@ -99,16 +100,16 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 Gson gson=new Gson();
                 Type listType = new TypeToken<Message<List<PartNews>>>(){}.getType();
                 Message<List<PartNews>> t=gson.fromJson(result,listType);
-                dataList = t.getResult();
+                Data.searchResultList = t.getResult();
 
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if(dataList.size() == 0){
+                        if(Data.searchResultList.size() == 0){
                             warning_tv.setVisibility(View.VISIBLE);
                         } else {
                             warning_tv.setVisibility(View.GONE);
-                            adapter.submitList(dataList);
+                            adapter.submitList(Data.searchResultList);
                         }
                     }
                 });

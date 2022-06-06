@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.seetheworld.R;
+import com.example.seetheworld.data.Data;
 import com.example.seetheworld.data.Message;
 import com.example.seetheworld.data.PartNews;
 import com.example.seetheworld.util.HttpUtils;
@@ -33,7 +34,7 @@ public class NewsListFragment extends Fragment {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefresh;
     NewsListAdapter adapter;
-    List<PartNews> dataList;
+//    List<PartNews> dataList;
     int page = 1;
     private final Handler handler = new Handler(Looper.myLooper());
     private TextView footer;
@@ -72,7 +73,8 @@ public class NewsListFragment extends Fragment {
         adapter = new NewsListAdapter(new DiffUtilNewsCallBack());
         adapter.setOnNewsItemClickListener(position -> {
             Intent intent = new Intent(getActivity(), ShowNewsActivity.class);
-            intent.putExtra("newsid", dataList.get(position).getId());
+            intent.putExtra("newsid", Data.dataList.get(position).getId());
+            Data.speakStartID = position;
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
@@ -162,7 +164,7 @@ public class NewsListFragment extends Fragment {
                             swipeRefresh.setRefreshing(false);
                         }
                         adapter.submitList(newList);
-                        dataList = newList;
+                        Data.dataList = newList;
                     }
                 });
 

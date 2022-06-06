@@ -3,10 +3,14 @@ package com.example.seetheworld.ui.news;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -15,8 +19,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.seetheworld.R;
+import com.example.seetheworld.data.Data;
 import com.example.seetheworld.data.Message;
 import com.example.seetheworld.data.PartNews;
+import com.example.seetheworld.ui.floatwindow.FloatWindow;
 import com.example.seetheworld.util.HttpUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,13 +30,12 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.Locale;
 
-public class ShowNewsActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+public class ShowNewsActivity extends AppCompatActivity {
     private TextView title;
     private TextView media;
     private TextView date;
     private TextView content;
     private ImageButton read_btn;
-    private TextToSpeech engine;
 
     private Handler handler = new Handler(Looper.myLooper()){
         @Override
@@ -46,6 +51,7 @@ public class ShowNewsActivity extends AppCompatActivity implements TextToSpeech.
             }
         }
     };
+    private int newsid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +60,24 @@ public class ShowNewsActivity extends AppCompatActivity implements TextToSpeech.
 
         this.getSupportActionBar().hide();
 
-        engine = new TextToSpeech(this, this);
 
         read_btn = (ImageButton) findViewById(R.id.read_news);
         read_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                engine.speak(content.getText(), TextToSpeech.QUEUE_FLUSH, null, null);
+                Intent intent = new Intent(ShowNewsActivity.this, FloatWindow.class);
+
+                if (!Settings.canDrawOverlays(getApplicationContext())) {
+                    startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                            Uri.parse("package:" + getPackageName())), 0);
+                } else {
+                    startService(intent);
+                }
+
             }
         });
 
-        int newsid = getIntent().getIntExtra("newsid",25752);
+        newsid = getIntent().getIntExtra("newsid",25752);
         getData(newsid);
         title = (TextView) findViewById(R.id.news_detail_title);
         media = (TextView) findViewById(R.id.news_detail_media);
@@ -104,12 +117,4 @@ public class ShowNewsActivity extends AppCompatActivity implements TextToSpeech.
 
     }
 
-    @Override
-    public void onInit(int status) {
-        if(status == TextToSpeech.SUCCESS){
-            engine.setLanguage(Locale.CHINA);
-            engine.setPitch(1.0f);//方法用来控制音调
-            engine.setSpeechRate(1.0f);//用来控制语速
-        }
-    }
 }
