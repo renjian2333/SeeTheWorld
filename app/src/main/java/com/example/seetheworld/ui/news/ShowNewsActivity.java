@@ -3,9 +3,11 @@ package com.example.seetheworld.ui.news;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.speech.tts.TextToSpeech;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -20,12 +22,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Locale;
 
-public class ShowNewsActivity extends AppCompatActivity {
+public class ShowNewsActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
     private TextView title;
     private TextView media;
     private TextView date;
     private TextView content;
+    private ImageButton read_btn;
+    private TextToSpeech engine;
 
     private Handler handler = new Handler(Looper.myLooper()){
         @Override
@@ -42,13 +47,22 @@ public class ShowNewsActivity extends AppCompatActivity {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_news);
 
         this.getSupportActionBar().hide();
+
+        engine = new TextToSpeech(this, this);
+
+        read_btn = (ImageButton) findViewById(R.id.read_news);
+        read_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                engine.speak(content.getText(), TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        });
 
         int newsid = getIntent().getIntExtra("newsid",25752);
         getData(newsid);
@@ -90,4 +104,12 @@ public class ShowNewsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onInit(int status) {
+        if(status == TextToSpeech.SUCCESS){
+            engine.setLanguage(Locale.CHINA);
+            engine.setPitch(1.0f);//方法用来控制音调
+            engine.setSpeechRate(1.0f);//用来控制语速
+        }
+    }
 }

@@ -21,6 +21,7 @@
             android:src="@drawable/ic_back_24" />
 
         <ImageButton
+            android:id="@+id/read_news"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#0000"
