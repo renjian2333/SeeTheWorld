@@ -2,7 +2,6 @@ package com.example.seetheworld.util;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.seetheworld.data.Data;
 import com.iflytek.cloud.ErrorCode;
@@ -84,7 +83,7 @@ public class TTSUtils implements InitListener, SynthesizerListener {
 
     @Override
     public void onSpeakBegin() {
-        Log.d("begin", "onSpeakBegin: ");
+
     }
 
     @Override

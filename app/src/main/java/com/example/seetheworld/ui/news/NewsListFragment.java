@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -177,7 +176,6 @@ public class NewsListFragment extends Fragment {
                         adapter.submitList(newList);
                         dataList = newList;
                         if(Data.dataList == null && newsType.equals("热门")){
-                            Log.d("type", "run: "+newsType);
                             Data.dataList = dataList;
                         }
                     }

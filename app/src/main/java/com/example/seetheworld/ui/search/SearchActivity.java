@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,7 +33,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     RecyclerView recyclerView;
     NewsListAdapter adapter;
-//    List<PartNews> dataList;
     private final Handler handler = new Handler(Looper.myLooper());
     private SearchView searchView;
     private TextView warning_tv;
