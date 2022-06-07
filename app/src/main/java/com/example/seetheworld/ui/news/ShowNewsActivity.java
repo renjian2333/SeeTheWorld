@@ -65,6 +65,12 @@ public class ShowNewsActivity extends AppCompatActivity {
         read_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Data.dataType == 0){
+                    Data.speakList = Data.dataList;
+                } else {
+                    Data.speakList = Data.searchResultList;
+                }
+
                 Intent intent = new Intent(ShowNewsActivity.this, FloatWindow.class);
 
                 if (!Settings.canDrawOverlays(getApplicationContext())) {

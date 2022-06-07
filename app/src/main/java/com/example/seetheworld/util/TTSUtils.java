@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.seetheworld.data.Data;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.SpeechConstant;
@@ -124,7 +125,8 @@ public class TTSUtils implements InitListener, SynthesizerListener {
 
     @Override
     public void onCompleted(SpeechError arg0) {
-        // TODO Auto-generated method stub
+        // 继续播报下一条
+        mTts.startSpeaking(Data.speakList.get(Data.speakStartID++).getContent(), this);
     }
 }
 

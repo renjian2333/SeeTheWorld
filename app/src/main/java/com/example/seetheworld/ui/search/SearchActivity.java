@@ -74,6 +74,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         adapter.setOnNewsItemClickListener(position -> {
             Intent intent = new Intent(this, ShowNewsActivity.class);
             intent.putExtra("newsid", Data.searchResultList.get(position).getId());
+            Data.speakStartID = position;
+            Data.dataType = 0;
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
@@ -101,6 +103,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 Type listType = new TypeToken<Message<List<PartNews>>>(){}.getType();
                 Message<List<PartNews>> t=gson.fromJson(result,listType);
                 Data.searchResultList = t.getResult();
+                Data.dataType = 1;
 
                 handler.post(new Runnable() {
                     @Override

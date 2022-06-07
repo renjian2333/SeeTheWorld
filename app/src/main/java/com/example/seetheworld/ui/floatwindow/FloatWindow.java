@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,11 +41,11 @@ public class FloatWindow extends Service {
         }
 
         layoutParams.format = PixelFormat.TRANSLUCENT;
-        layoutParams.gravity = Gravity.END | Gravity.TOP;
+        layoutParams.gravity = Gravity.END | Gravity.BOTTOM;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         layoutParams.width = WRAP_CONTENT;
         layoutParams.height = WRAP_CONTENT;
-        layoutParams.y = 700;
+        layoutParams.y = 200;
         windowManager.addView(floatWindow, layoutParams);
 
         ImageButton close_btn = floatWindow.findViewById(R.id.float_window_close);
@@ -92,8 +93,8 @@ public class FloatWindow extends Service {
 
 
     private void mySpeak(){
-        if(Data.speakStartID < Data.dataList.size()) {
-            TTSUtils.getInstance().speak(Data.dataList.get(Data.speakStartID++).getContent(), this);
+        if(Data.speakStartID < Data.speakList.size()) {
+            TTSUtils.getInstance().speak(Data.speakList.get(Data.speakStartID++).getContent(), this);
         } else {
             TTSUtils.getInstance().release();
             stopSelf();

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,9 @@ public class NewsListFragment extends Fragment {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefresh;
     NewsListAdapter adapter;
-//    List<PartNews> dataList;
+    public int test = 1;
+    public List<PartNews> dataList;
+
     int page = 1;
     private final Handler handler = new Handler(Looper.myLooper());
     private TextView footer;
@@ -73,8 +76,9 @@ public class NewsListFragment extends Fragment {
         adapter = new NewsListAdapter(new DiffUtilNewsCallBack());
         adapter.setOnNewsItemClickListener(position -> {
             Intent intent = new Intent(getActivity(), ShowNewsActivity.class);
-            intent.putExtra("newsid", Data.dataList.get(position).getId());
+            intent.putExtra("newsid", dataList.get(position).getId());
             Data.speakStartID = position;
+            Data.dataType = 0;
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
@@ -84,7 +88,7 @@ public class NewsListFragment extends Fragment {
         initPullFlush();
         initLoadMoreListener();
 
-        getNewsData(page, 20, true);
+        getNewsData(1, 20, true);
         footer = view.findViewById(R.id.footer);
     }
 
@@ -103,6 +107,7 @@ public class NewsListFragment extends Fragment {
                 @Override
                 public void run() {
                     recyclerView.smoothScrollToPosition(0);
+                    Data.dataList = dataList;
                 }
             },500);
         });
@@ -125,6 +130,12 @@ public class NewsListFragment extends Fragment {
                     footer.setVisibility(View.VISIBLE);
                     getNewsData(page, 20, true);
                     page++;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Data.dataList = dataList;
+                        }
+                    },500);
                 }
             }
         });
@@ -164,7 +175,11 @@ public class NewsListFragment extends Fragment {
                             swipeRefresh.setRefreshing(false);
                         }
                         adapter.submitList(newList);
-                        Data.dataList = newList;
+                        dataList = newList;
+                        if(Data.dataList == null && newsType.equals("热门")){
+                            Log.d("type", "run: "+newsType);
+                            Data.dataList = dataList;
+                        }
                     }
                 });
 
