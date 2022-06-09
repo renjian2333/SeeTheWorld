@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class NewsListFragment extends Fragment {
     NewsListAdapter adapter;
     public int test = 1;
     public List<PartNews> dataList;
+    private static final String TAG = "NewsListFragment";
 
     int page = 1;
     private final Handler handler = new Handler(Looper.myLooper());
@@ -48,12 +50,14 @@ public class NewsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("qin", "onCreate: "+TAG);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d("qin", "onCreateView: "+TAG);
         return inflater.inflate(R.layout.fragment_news_list, container, false);
     }
 
@@ -62,6 +66,7 @@ public class NewsListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Log.d("qin", "onViewCreated: "+TAG);
         // recyclerView
         recyclerView = view.findViewById(R.id.news_rv);
         recyclerView.setHasFixedSize(true);

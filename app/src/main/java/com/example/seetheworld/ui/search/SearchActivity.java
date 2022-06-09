@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,10 +22,12 @@ import com.example.seetheworld.R;
 import com.example.seetheworld.data.Data;
 import com.example.seetheworld.data.Message;
 import com.example.seetheworld.data.PartNews;
+import com.example.seetheworld.ui.floatwindow.FloatWindow;
 import com.example.seetheworld.ui.news.DiffUtilNewsCallBack;
 import com.example.seetheworld.ui.news.NewsListAdapter;
 import com.example.seetheworld.ui.news.ShowNewsActivity;
 import com.example.seetheworld.util.HttpUtils;
+import com.example.seetheworld.util.TTSUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -36,6 +41,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     private final Handler handler = new Handler(Looper.myLooper());
     private SearchView searchView;
     private TextView warning_tv;
+    private static final String TAG = "SRUtils";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +49,14 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         setContentView(R.layout.activity_search);
         this.getSupportActionBar().hide();
 
+        Bundle bundle = getIntent().getExtras();
+        String hint = bundle.getString("hint");
+
         searchView = (SearchView) findViewById(R.id.search_input);
         searchView.setOnQueryTextListener(this);
         searchView.setSubmitButtonEnabled(true);
+        // 设置搜索提示
+        searchView.setQueryHint(hint);
 
         warning_tv = (TextView) findViewById(R.id.no_result_info);
 
@@ -73,10 +84,44 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
             Intent intent = new Intent(this, ShowNewsActivity.class);
             intent.putExtra("newsid", Data.searchResultList.get(position).getId());
             Data.speakStartID = position;
-            Data.dataType = 0;
+            Data.dataType = 1;
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
+
+        // 是否读新闻
+        if(bundle.getBoolean("read")){
+            TTSUtils.getInstance().speak("正在查找相关新闻",this);
+            getData(hint,50);
+            Log.d(TAG, "SearchActivity: begin to read");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(Data.searchResultList.size() == 0){
+                        TTSUtils.getInstance().speak("暂无相关新闻",SearchActivity.this);
+                        return;
+                    }
+                    Data.speakList =Data.searchResultList;
+                    Data.speakStartID = 0;
+                    Data.dataType = 1;
+
+                    Intent intent = new Intent(SearchActivity.this, FloatWindow.class);
+
+                    if (!Settings.canDrawOverlays(getApplicationContext())) {
+                        startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                Uri.parse("package:" + getPackageName())), 0);
+                    } else {
+                        startService(intent);
+                    }
+                }
+            }).start();
+        }
     }
 
     @Override
@@ -92,6 +137,11 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         return true;
     }
 
+    /**
+     * 查找实现
+     * @param keyword
+     * @param size
+     */
     private void getData(String keyword, int size){
         new Thread(new Runnable() {
             @Override

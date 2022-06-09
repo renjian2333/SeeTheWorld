@@ -38,7 +38,6 @@ public class HttpUtils {
         try {
             Response response = client.newCall(request).execute();
             responseData = response.body().string();
-            System.out.println("responseData=" + responseData);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,7 +65,6 @@ public class HttpUtils {
         try {
             Response response = client.newCall(request).execute();
             responseData = response.body().string();
-            System.out.println("responseData=" + responseData);
         } catch (IOException e) {
             e.printStackTrace();
         }

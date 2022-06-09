@@ -3,13 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/avator_bg.xml" value="0.1915" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/float_background.xml" value="0.124" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_arrow_forward_30.xml" value="0.1915" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_arrow_right_24.xml" value="0.1915" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_back_24.xml" value="0.1915" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.1825" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_camera_24.xml" value="0.1915" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_close_24.xml" value="0.1825" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_headset2.xml" value="0.1915" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_headset_30.xml" value="0.1915" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_help_24.xml" value="0.1915" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1915" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_notifications_24.xml" value="0.1915" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_notifications_40.xml" value="0.1915" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1915" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_pause_30.xml" value="0.1825" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_play_30.xml" value="0.1825" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_settings_30.xml" value="0.1915" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_skip_next_30.xml" value="0.1825" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_star_30.xml" value="0.1915" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_text_format_24.xml" value="0.1915" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_voice.xml" value="0.137" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/drawable/ic_voice_30.xml" value="0.137" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/layout/activity_float_window.xml" value="0.5" />
@@ -26,6 +40,7 @@
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/layout/fragment_scan_read.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/layout/list_footer.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/layout/news_item.xml" value="0.22" />
+        <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/layout/pop_window.xml" value="0.1" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/layout/select.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/qinxi/AndroidStudioProjects/SeeTheWorld/test/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />

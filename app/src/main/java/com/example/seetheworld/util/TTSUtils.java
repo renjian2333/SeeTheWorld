@@ -36,10 +36,10 @@ public class TTSUtils implements InitListener, SynthesizerListener {
         mTts.setParameter(SpeechConstant.PARAMS, null);
         // 设置在线云端
         mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
-        // 设置发音人
-        mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoyan");
+        // 设置发音人 xiaoyan aisjiuxu x3_xiaodu
+        mTts.setParameter(SpeechConstant.VOICE_NAME, "x2_qianxue2");
         // 设置发音语速
-        mTts.setParameter(SpeechConstant.SPEED, "5");
+        mTts.setParameter(SpeechConstant.SPEED, "40");
         // 设置音调
         mTts.setParameter(SpeechConstant.PITCH, "50");
         // 设置合成音量
@@ -83,7 +83,6 @@ public class TTSUtils implements InitListener, SynthesizerListener {
 
     @Override
     public void onSpeakBegin() {
-
     }
 
     @Override
@@ -122,10 +121,17 @@ public class TTSUtils implements InitListener, SynthesizerListener {
         }
     }
 
+    public boolean isSpeaking(){
+        return mTts.isSpeaking();
+    }
+
+
     @Override
     public void onCompleted(SpeechError arg0) {
-        // 继续播报下一条
-        mTts.startSpeaking(Data.speakList.get(Data.speakStartID++).getContent(), this);
+        if(Data.dataType != 2) {
+            // 继续播报下一条
+            mTts.startSpeaking(Data.speakList.get(Data.speakStartID++).getContent(), this);
+        }
     }
 }
 
