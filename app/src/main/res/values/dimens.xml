@@ -9,6 +9,10 @@
 
     <dimen name="small_text_size">15sp</dimen>
 
+    <dimen name="median_icon_size">40dp</dimen>
     <dimen name="small_icon_size">30dp</dimen>
     <dimen name="smallest_icon_size">24dp</dimen>
+
+    <!--    拍照阅读-->
+    <dimen name="btn_radius">50dp</dimen>
 </resources>

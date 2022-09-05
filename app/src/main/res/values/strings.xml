@@ -10,4 +10,6 @@
     <string name="loading">加载中...</string>
     <string name="loadall">已加载全部数据</string>
     <string name="no_data">暂无相关数据</string>
+    <string name="scan_pic_from_file">导入图片识别</string>
+    <string name="scan_from_camera">拍照识别</string>
 </resources>

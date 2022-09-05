@@ -3,8 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.ScanReadFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/btn_radius"
+            app:cardBackgroundColor="@color/ls_blue"
+            android:layout_marginBottom="@dimen/btn_radius">
+
+            <Button
+                android:layout_width="280dp"
+                android:layout_height="80dp"
+                android:background="#0000"
+                android:textSize="@dimen/small_text_size"
+                android:text="@string/scan_pic_from_file"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/btn_radius"
+            app:cardBackgroundColor="@color/ls_blue">
+
+            <Button
+                android:layout_width="280dp"
+                android:layout_height="80dp"
+                android:background="#0000"
+                android:textSize="@dimen/small_text_size"
+                android:text="@string/scan_from_camera"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
 </FrameLayout>
